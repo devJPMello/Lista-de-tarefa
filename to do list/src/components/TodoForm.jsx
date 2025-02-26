@@ -1,10 +1,9 @@
-import React from 'react'
+import {useState} from 'react'
 
 const Todo = () => {
-    return <div>
-        <h2>
-            Criar tarefa:
-        </h2>
+    return( 
+    <div className='todo-form'>
+        <h2>Criar tarefa:</h2>
         <form>
             <input type='text' placeholder='Digite o titulo'/>
             <select>
@@ -16,5 +15,6 @@ const Todo = () => {
             <button type='submit'>Criar tarefa</button>
         </form>
     </div>
-}
+    );
+};
 export default TodoForm;

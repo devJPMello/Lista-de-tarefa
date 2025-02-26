@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Todo from "./components/Todo"
-import Todo from "./components/TodoForm"
+import TodoForm from "./components/TodoForm"
 import "./App.css"
 
 
@@ -26,16 +26,16 @@ function App() {
     }
   ])
 
-  return <div className="app" >
+  return (<div className="app" >
     <h1> Lista de tarefas</h1>
     <div className='todo-list'>
       {todos.map((todo) => (
         <Todo todo={todo} />
-      )
-      )}
+      ))}
     </div>
     <TodoForm />
   </div>
-}
+  );
+};
 
 export default App
