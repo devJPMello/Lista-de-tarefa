@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { use, useState } from 'react'
 import Todo from "./components/Todo"
 import TodoForm from "./components/TodoForm"
 import Search from "./components/Search"
@@ -27,13 +27,17 @@ function App() {
     }
   ])
 
-  const[search, setSearch] = useState("")
+  const [search, setSearch] = useState("");
 
-  const addTodo = (text, category) =>{
+  const [filter, setFilter] = useState("All");
+
+  const [sort, setSort] = useState("Asc");
+
+  const addTodo = (text, category) => {
 
     const newTodos = [...todos, {
-      id: Math.floor(Math.random()*10000),
-      text, 
+      id: Math.floor(Math.random() * 10000),
+      text,
       category,
       isCompleted: false,
     }]
@@ -42,7 +46,7 @@ function App() {
 
   const removeTodo = (id) => {
     const newTodos = [...todos];
-    const filteredTodos = newTodos.filter((todo) => 
+    const filteredTodos = newTodos.filter((todo) =>
       todo.id !== id ? todo : null);
     setTodos(filteredTodos);
   };
@@ -55,18 +59,29 @@ function App() {
 
   return (<div className="app" >
     <h1> Lista de tarefas</h1>
-    <Search search={search} setSearch={setSearch}/>
+    <Search search={search} setSearch={setSearch} />
+    <Filter filter={setFilfilterter} setFilter={setFilter} />
+
     <div className='todo-list'>
-      {todos.filter((todo) => todo.text.toLowerCase().includes(search.toLowerCase())
-      .map((todo) => (
-        <Todo 
-        key={todo.id} 
-        todo={todo}
-        removeTodo={removeTodo}
-        completeTodo={completeTodo} />
-      )))}
+      {todos
+        .filter((todo) =>
+          filter === "All"
+            ? true
+            : filter === "Complete"
+              ? todo.isCompleted
+              : !todo.isCompleted
+        )
+        .filter((todo) =>
+          todo.text.toLowerCase().includes(search.toLowerCase()))
+        .map((todo) => (
+          <Todo
+            key={todo.id}
+            todo={todo}
+            removeTodo={removeTodo}
+            completeTodo={completeTodo} />
+        ))}
     </div>
-    <TodoForm addTodo = {addTodo} removeTodo={removeTodo}  completeTodo={completeTodo}/>
+    <TodoForm addTodo={addTodo} removeTodo={removeTodo} completeTodo={completeTodo} />
   </div>
   );
 };
