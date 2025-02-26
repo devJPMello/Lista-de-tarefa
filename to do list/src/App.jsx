@@ -68,7 +68,7 @@ function App() {
         .filter((todo) =>
           filter === "All"
             ? true
-            : filter === "Complete"
+            : filter === "Completo"
               ? todo.isCompleted
               : !todo.isCompleted
         )
