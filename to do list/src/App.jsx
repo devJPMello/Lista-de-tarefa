@@ -35,7 +35,14 @@ function App() {
       isCompleted: false,
     }]
     setTodos(newTodos);
-  }
+  };
+
+  const removeTodo = (id) => {
+    const newTodos = [...todos];
+    const filteredTodos = newTodos.filter((todo) => 
+      todo.id !== id ? todo : null);
+    setTodos(filteredTodos);
+  };
 
   return (<div className="app" >
     <h1> Lista de tarefas</h1>
@@ -44,7 +51,7 @@ function App() {
         <Todo key={todo.id} todo={todo} />
       ))}
     </div>
-    <TodoForm addTodo = {addTodo} />
+    <TodoForm addTodo = {addTodo} removeTodo={removeTodo} />
   </div>
   );
 };
