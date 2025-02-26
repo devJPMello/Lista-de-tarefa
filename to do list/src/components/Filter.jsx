@@ -20,3 +20,5 @@ const Filter = ({ filter, setFilter }) => {
         </div>
     )
 }
+
+export default Filter
